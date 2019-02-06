@@ -1,0 +1,17 @@
+FR1
+TITLE: Download application
+DESC: a user should be able to download the application free of charge
+RAT: in order for a user to use the software
+DEP: none
+
+FR2
+Title: install application
+Desc: a user should be able to install the applicaion once it is downloaded
+Rat: in order for a user to use the software
+Dep: Download application
+
+FR3
+Title: 
+Desc:
+Rat:
+Dep:
