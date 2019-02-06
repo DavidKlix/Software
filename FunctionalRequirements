@@ -11,7 +11,43 @@ Rat: in order for a user to use the software
 Dep: Download application
 
 FR3
-Title: 
-Desc:
-Rat:
-Dep:
+Title:  Frequency table
+Desc: a user should be able to create a frequency table by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
+
+FR4
+Title: Relative frequency table
+Desc: a user should be able to create a relative frequency table by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
+
+FR5
+Title: Bar chart (2-d)
+Desc: a user should be able to create a bar chart by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
+
+FR6
+Title: pie chart
+Desc: a user should be able to create a pie chart by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
+
+FR7
+Title: contingency table
+Desc: a user should be able to create a contingency table by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
+
+FR8
+Title: side by side bar chart
+Desc: a user should be able to create a side by sied bar chart by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
+
+FR9
+Title: segmented bar chart
+Desc: a user should be able to create a segmented bar chart by giving inputs
+Rat: requested by Dr. Jornaz
+Dep: fr1 fr2
