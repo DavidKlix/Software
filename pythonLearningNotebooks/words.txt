@@ -1,0 +1,9 @@
+hay hey
+go		chess	checkers
+the previous line used tabs
+
+that was an empty line
+a e i o u y
+
+10 20 30
+still strings
