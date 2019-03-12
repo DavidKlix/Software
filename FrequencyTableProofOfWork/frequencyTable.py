@@ -12,4 +12,11 @@ def hello(name):
 def frequencyTable(x):
     valueCounts = x.apply(pd.Series.value_counts)
     return valueCounts
-
+'''
+def frequencyTablePercent(x):
+    valueCounts = x.apply(pd.Series.value_counts)
+    total = 0
+    for n in Series:
+        total += 1
+    return valueCounts/total
+'''
