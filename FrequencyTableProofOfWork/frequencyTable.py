@@ -20,9 +20,10 @@ def frequencyTable(x):
 @xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
 def frequencyTablePercent(x):
     valueCounts = frequencyTable(x)
-    total = 0
-    for valueCounts in x:
-        total += 1
-    if total == 0:
-        return 0
-    return total
+    columnNames = list(valueCounts.columns.values)
+    newValueCounts = valueCounts
+    for i in columnNames:
+        y = valueCounts[i].value_counts(normalize = True)
+        y = y.to_frame()
+        newValueCounts.merge(y)
+    return newValueCounts
