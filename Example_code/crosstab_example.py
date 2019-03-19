@@ -4,11 +4,12 @@ Created on Tue Mar 19 17:44:21 2019
 
 @author: S524113
 """
-
+import xlwings as xw
 import pandas as pd
-
-df = pd.read_csv('tabby.csv')
-
-tabby = pd.crosstab(df['Sex'], df['Status'], margins=True)
-
-print(tabby)
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+@xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
+def contingencyTable(x):
+    df = x.apply(pd.Series.name)
+    tabby = pd.crosstab(df[0], df[1], margins=True)
+    return tabby

@@ -24,11 +24,10 @@ def frequencyTablePercent(x):
         returning = x.apply(pd.Series.value_counts)
         returning["percent"] = valueCounts[headings[0]]
         return returning
-
-
-
-
-
-
-
-
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+@xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
+def contingencyTable(x):
+    df = x.apply(pd.Series)
+    tabby = pd.crosstab(df['Sex'], df['Status'], margins=True)
+    return tabby
