@@ -19,11 +19,16 @@ def frequencyTable(x):
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
 @xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
 def frequencyTablePercent(x):
-    valueCounts = frequencyTable(x)
-    columnNames = list(valueCounts.columns.values)
-    newValueCounts = valueCounts
-    for i in columnNames:
-        y = valueCounts[i].value_counts(normalize = True)
-        y = y.to_frame()
-        newValueCounts.merge(y)
-    return newValueCounts
+        valueCounts = x.apply(pd.Series.value_counts, normalize = True)
+        headings = list(valueCounts.columns.values)
+        returning = x.apply(pd.Series.value_counts)
+        returning["percent"] = valueCounts[headings[0]]
+        return returning
+
+
+
+
+
+
+
+
