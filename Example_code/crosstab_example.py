@@ -10,6 +10,6 @@ import pandas as pd
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
 @xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
 def contingencyTable(x):
-    df = x.apply(pd.Series.name)
-    tabby = pd.crosstab(df[0], df[1], margins=True)
+    df = x.apply(pd.Series)
+    tabby = pd.crosstab(df['Sex'], df['Status'], margins=True)
     return tabby
