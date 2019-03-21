@@ -31,3 +31,4 @@ def contingencyTable(x):
     df = x.apply(pd.Series)
     tabby = pd.crosstab(df['Sex'], df['Status'], margins=True)
     return tabby
+
