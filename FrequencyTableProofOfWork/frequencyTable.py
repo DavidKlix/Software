@@ -1,6 +1,6 @@
 import xlwings as xw
 import pandas as pd
-
+import numpy
 
 @xw.func
 def hello(name):
@@ -33,3 +33,10 @@ def contingencyTable(x):
     headings = list(df.columns.values)
     tabby = pd.crosstab(columns = df[headings[0]], index= df[headings[1]], margins=True)
     return tabby
+
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+@xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
+def statMeasures(x):
+    
+    return results
