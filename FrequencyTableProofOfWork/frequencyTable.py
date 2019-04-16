@@ -42,18 +42,16 @@ def statMeasures(x):
     df = x.apply(pd.Series)
     headings = list(df.columns.values)
     #Mean should find the average
-    average = mean(df)
+    average = np.mean(df)
     #Median should find the central number
-    middle = median(df)
+    middle = np.median(df)
     #Mode should find the most common number
-    mode = 0
+    middle = mode(df)
+    #Standard Deviation
+    deviate = np.stdev(df)
+    
     return df
-def mean(list):
-    x = sum(list)/list.length()
-    return x
-def median(list):
-    x = list.length()/2
-    return list[x]
+
 def mode(list):
     modes = []
     modeDict = {}
@@ -64,9 +62,16 @@ def mode(list):
             modeDict[i] += 1
     max_value = 0
     for i in modeDict:
-        if modeDict[i] >= max_value:
-            modes.append(i)
-            max_value = i
+        if modeDict[i] == 0:
+            modes = [i]
+            max_value = modeDict[i]
+        else:
+            if modeDict[i] == max_value:
+                modes.append(i)
+            else:
+                if modeDict[i] > max_value:
+                    modes = [i]
+                    max_value = modeDict[i]
     return modes
 
 @xw.func
