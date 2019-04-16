@@ -40,17 +40,18 @@ def contingencyTable(x):
 @xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
 def statMeasures(x):
     df = x.apply(pd.Series)
-    headings = list(df.columns.values)
+    #headings = list(df.columns.values)
     #Mean should find the average
     average = np.mean(df)
     #Median should find the central number
     middle = np.median(df)
     #Mode should find the most common number
-    middle = mode(df)
+    common = mode(df)
     #Standard Deviation
     deviate = np.stdev(df)
+    l = [average, middle, common, deviate]
     
-    return df
+    return l
 
 def mode(list):
     modes = []
