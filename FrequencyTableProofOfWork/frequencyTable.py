@@ -2,8 +2,6 @@ import xlwings as xw
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
-import numpy as np
-import matplotlib.pyplot as plt
 
 @xw.func
 def hello(name):
@@ -37,14 +35,39 @@ def contingencyTable(x):
     tabby = pd.crosstab(columns = df[headings[0]], index= df[headings[1]], margins=True)
     return tabby
 
-#@xw.func
-#@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
-#@xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
-#def statMeasures(x):
- #   
- #   return results
-
-
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+@xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
+def statMeasures(x):
+    df = x.apply(pd.Series)
+    headings = list(df.columns.values)
+    #Mean should find the average
+    average = mean(df)
+    #Median should find the central number
+    middle = median(df)
+    #Mode should find the most common number
+    mode = 0
+    return df
+def mean(list):
+    x = sum(list)/list.length()
+    return x
+def median(list):
+    x = list.length()/2
+    return list[x]
+def mode(list):
+    modes = []
+    modeDict = {}
+    for i in list:
+        if i not in modeDict:
+            modeDict[i] = 1
+        else:
+            modeDict[i] += 1
+    max_value = 0
+    for i in modeDict:
+        if modeDict[i] >= max_value:
+            modes.append(i)
+            max_value = i
+    return modes
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
