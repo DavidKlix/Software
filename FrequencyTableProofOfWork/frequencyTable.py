@@ -2,7 +2,6 @@ import xlwings as xw
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
-import numpy as np
 import matplotlib.pyplot as plt
 
 @xw.func
@@ -68,22 +67,103 @@ def pieChart(x):
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
-@xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
-def sideBySideBarChart(x):
+def segmentedBarChart(x):
     df = x.apply(pd.Series)
     headings = list(df.columns.values)
-    N = len(df[headings[1]])
-    menMeans = df[headings[1]]
-    womenMeans = df[headings[2]]
+    N = len(headings)-1
+
     ind = np.arange(N)    # the x locations for the groups
     width = 0.35       # the width of the bars: can also be len(x) sequence
     
-    p1 = plt.bar(ind, menMeans, width)
-    p2 = plt.bar(ind, womenMeans, width, bottom=menMeans)
+    alive =list( df.iloc[1])
+    dead = list(df.iloc[2])
+    alive = list(alive[1::])
+    dead = list(dead[1::])
     
-    plt.ylabel('Scores')
-    plt.title('Scores by group and gender')
-    plt.xticks(df[headings[0]])
+    p1 = plt.bar(ind, alive, width)
+    p2 = plt.bar(ind, dead, width, bottom=dead)
+    
     plt.legend((p1[0], p2[0]), ('Men', 'Women'))
     
     return plt.show()
+
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+def sideBySideBarChart(x):
+    df = x.apply(pd.Series)
+    headings = list(df.columns.values)
+    labels = df[0]
+    n_groups = len(headings)-1 
+    
+    index = np.arange(n_groups)
+    bar_width = 0.35
+    opacity = 0.8
+    
+    alive =list( df.iloc[1])
+    dead = list(df.iloc[2])
+    alive = list(alive[1::])
+    dead = list(dead[1::])
+    
+    rects1 = plt.bar(index, alive, bar_width,
+    alpha=opacity,
+    color='b',
+    label= labels[1])
+     
+    rects2 = plt.bar(index + bar_width, dead, bar_width,
+    alpha=opacity,
+    color='g',
+    label= labels[2])
+
+    #plt.xticks(index + bar_width, (headings))
+    #plt.legend()
+     
+    
+    return plt.show()
+
+
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+def test(x):
+    # data to plot
+    n_groups = 4
+    
+    
+    means_frank = (203,118,178,212)
+    means_guido = (112,167,528,673)
+     
+    # create plot
+    fig, ax = plt.subplots()
+    index = np.arange(n_groups)
+    bar_width = 0.35
+    opacity = 0.8
+     
+    rects1 = plt.bar(index, means_frank, bar_width,
+    alpha=opacity,
+    color='b',
+    label='Frank')
+     
+    rects2 = plt.bar(index + bar_width, means_guido, bar_width,
+    alpha=opacity,
+    color='g',
+    label='Guido')
+     
+    plt.xlabel('Person')
+    plt.ylabel('Scores')
+    plt.title('Scores by person')
+    plt.xticks(index + bar_width, ('A', 'B', 'C', 'D'))
+    plt.legend()
+     
+    plt.tight_layout()
+    return plt.show()
+
+
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+def histogram(x,binLength = 1):
+    df = x.apply(pd.Series)
+    headings = list(df.columns.values)
+    if (binLength == 1):
+        binLength = len(df[headings[0]])
+    binLength = int(binLength)
+    theHist = np.histogram([1,2,1],bins =[0,1,2,3])
+    return theHist
