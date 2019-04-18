@@ -139,22 +139,20 @@ def sideBySideBarChart(x):
     headings = list(df.columns.values)
     labels = df[0]
     n_groups = len(headings)-1 
-    
+    fig , ax = plt.subplots()
     index = np.arange(n_groups)
     bar_width = 0.35
     opacity = 0.8
     
-    alive =list( df.iloc[1])
-    dead = list(df.iloc[2])
-    alive = list(alive[1::])
-    dead = list(dead[1::])
+    col1 = df[headings[1]]
+    col2 = df[headings[2]]
     fig = plt.figure()
-    rects1 = plt.bar(index, alive, bar_width,
+    plt.bar(index, col1, bar_width,
     alpha=opacity,
     color='b',
     label= labels[1])
      
-    rects2 = plt.bar(index + bar_width, dead, bar_width,
+    plt.bar(index + bar_width, col2, bar_width,
     alpha=opacity,
     color='g',
     label= labels[2])
@@ -210,6 +208,6 @@ def histogram(x,binLength = 1):
         binLength = len(df[headings[0]])
     binLength = int(binLength)
     fig = plt.figure()
-    plt.hist([1,2,1],bins =[0,1,2,3])
+    plt.hist(df[headings[0]],bins =range(binLength))
     sht = xw.Book().sheets[1]
     sht.pictures.add(fig,name = "test",update ="TRUE")
