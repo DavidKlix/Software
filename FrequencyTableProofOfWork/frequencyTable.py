@@ -5,10 +5,6 @@ import matplotlib.pyplot as plt; plt.rcdefaults()
 import math as mt
 
 @xw.func
-def hello(name):
-    return "hello {0}".format(name)
-
-@xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
 @xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
 def frequencyTable(x):
@@ -17,6 +13,7 @@ def frequencyTable(x):
 #pd is the module
 #Series is a type
 #value_counts is a function
+
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
 @xw.ret(index=True, header=True, expand='table', numbers =int)#specifies how the data is returned
@@ -50,9 +47,9 @@ def statMeasures(x):
     common = mode(df)
     #Standard Deviation
     deviate = np.std(df)
-    l = [average, middle, common, deviate]
-    
+    l = [average, middle, common, deviate]   
     return l
+
 def median(list):
     sortedList = sorted(list)
     index = len(sortedList)/2
@@ -62,6 +59,7 @@ def median(list):
         return sortedList[indexFloor]
     else:
         return sortedList[indexFloor], sortedList[indexCeiling]
+
 def mode(list):
     modes = []
     modeDict = {}
@@ -101,8 +99,10 @@ def barChart(x):
 def pieChart(x):
     df = x.apply(pd.Series)
     headings = list(df.columns.values)
+    fig = plt.figure()
     plt.pie(df[headings[1]],labels=list(zip(df[headings[0]],df[headings[1]])),autopct='%1.1f%%')
-    return plt.show()
+    sht = xw.Book().sheets[1]
+    sht.pictures.add(fig,name = "test",update ="TRUE")
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
@@ -119,12 +119,16 @@ def segmentedBarChart(x):
     alive = list(alive[1::])
     dead = list(dead[1::])
     
+    fig = plt.figure()
     p1 = plt.bar(ind, alive, width)
     p2 = plt.bar(ind, dead, width, bottom=dead)
     
     plt.legend((p1[0], p2[0]), ('Men', 'Women'))
     
-    return plt.show()
+    
+    sht = xw.Book().sheets[1]
+    sht.pictures.add(fig,name = "test",update ="TRUE")
+    
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
