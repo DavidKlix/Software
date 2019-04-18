@@ -2,11 +2,7 @@ import xlwings as xw
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
-<<<<<<< HEAD
-import matplotlib.pyplot as plt
-=======
 import math as mt
->>>>>>> fb14523a1be70234989dbadf8e574cc4b11b46b2
 
 @xw.func
 def hello(name):
