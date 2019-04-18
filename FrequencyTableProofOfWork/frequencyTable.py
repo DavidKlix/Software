@@ -88,10 +88,12 @@ def mode(list):
 def barChart(x):
     df = x.apply(pd.Series)
     headings = list(df.columns.values)
+    fig = plt.figure()
     plt.bar(df[headings[0]], df[headings[1]], align='center', alpha=0.5)
     plt.ylabel(headings[1])
     plt.xlabel(headings[0])
-    return plt.show()
+    sht = xw.Book().sheets[2]
+    sht.pictures.add(fig,name = "test",update ="TRUE")
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
@@ -146,7 +148,7 @@ def sideBySideBarChart(x):
     dead = list(df.iloc[2])
     alive = list(alive[1::])
     dead = list(dead[1::])
-    
+    fig = plt.figure()
     rects1 = plt.bar(index, alive, bar_width,
     alpha=opacity,
     color='b',
@@ -156,12 +158,9 @@ def sideBySideBarChart(x):
     alpha=opacity,
     color='g',
     label= labels[2])
-
-    #plt.xticks(index + bar_width, (headings))
-    #plt.legend()
-     
     
-    return plt.show()
+    sht = xw.Book().sheets[1]
+    sht.pictures.add(fig,name = "test",update ="TRUE")
 
 
 @xw.func
@@ -179,7 +178,7 @@ def test(x):
     index = np.arange(n_groups)
     bar_width = 0.35
     opacity = 0.8
-     
+    fig = plt.figure()
     rects1 = plt.bar(index, means_frank, bar_width,
     alpha=opacity,
     color='b',
@@ -197,7 +196,9 @@ def test(x):
     plt.legend()
      
     plt.tight_layout()
-    return plt.show()
+    sht = xw.Book().sheets[1]
+    sht.pictures.add(fig,name = "test",update ="TRUE")
+
 
 
 @xw.func
@@ -208,5 +209,7 @@ def histogram(x,binLength = 1):
     if (binLength == 1):
         binLength = len(df[headings[0]])
     binLength = int(binLength)
-    theHist = np.histogram([1,2,1],bins =[0,1,2,3])
-    return theHist
+    fig = plt.figure()
+    plt.hist([1,2,1],bins =[0,1,2,3])
+    sht = xw.Book().sheets[1]
+    sht.pictures.add(fig,name = "test",update ="TRUE")
