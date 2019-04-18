@@ -45,7 +45,7 @@ def statMeasures(x):
     #Mean should find the average
     average = np.mean(df)
     #Median should find the central number
-    middle = [median(df)]
+    middle = median(df)
     #Mode should find the most common number
     common = mode(df)
     #Standard Deviation
@@ -58,7 +58,7 @@ def median(list):
     index = len(sortedList)/2
     indexFloor = mt.floor(index)
     indexCeiling = mt.ceil(index)
-    if indexFloor == indexCeiling:
+    if sortedList[indexFloor] == sortedList[indexCeiling]:
         return sortedList[indexFloor]
     else:
         return sortedList[indexFloor], sortedList[indexCeiling]
