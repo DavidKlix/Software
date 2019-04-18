@@ -47,7 +47,7 @@ def statMeasures(x):
     common = mode(df)
     #Standard Deviation
     deviate = np.std(df)
-    l = [average, middle, common, deviate]   
+    l = [average, middle, common, deviate]
     return l
 
 def median(list):
@@ -92,8 +92,9 @@ def barChart(x):
     plt.bar(df[headings[0]], df[headings[1]], align='center', alpha=0.5)
     plt.ylabel(headings[1])
     plt.xlabel(headings[0])
-    sht = xw.Book().sheets[2]
+    sht = xw.Book().sheets[0]
     sht.pictures.add(fig,name = "test",update ="TRUE")
+    return "bar slot"
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
@@ -103,8 +104,9 @@ def pieChart(x):
     headings = list(df.columns.values)
     fig = plt.figure()
     plt.pie(df[headings[1]],labels=list(zip(df[headings[0]],df[headings[1]])),autopct='%1.1f%%')
-    sht = xw.Book().sheets[1]
+    sht = xw.Book().sheets[0]
     sht.pictures.add(fig,name = "test",update ="TRUE")
+    return "pie slot"
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
@@ -128,9 +130,9 @@ def segmentedBarChart(x):
     plt.legend((p1[0], p2[0]), ('Men', 'Women'))
     
     
-    sht = xw.Book().sheets[1]
+    sht = xw.Book().sheets[0]
     sht.pictures.add(fig,name = "test",update ="TRUE")
-    
+    return "Segmented Slot"
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
@@ -157,8 +159,9 @@ def sideBySideBarChart(x):
     color='g',
     label= labels[2])
     
-    sht = xw.Book().sheets[1]
+    sht = xw.Book().sheets[0]
     sht.pictures.add(fig,name = "test",update ="TRUE")
+    return "Side Slot"
 
 
 @xw.func
@@ -194,8 +197,9 @@ def test(x):
     plt.legend()
      
     plt.tight_layout()
-    sht = xw.Book().sheets[1]
+    sht = xw.Book().sheets[0]
     sht.pictures.add(fig,name = "test",update ="TRUE")
+    return "Test Slot"
 
 
 
@@ -208,6 +212,12 @@ def histogram(x,binLength = 1):
         binLength = len(df[headings[0]])
     binLength = int(binLength)
     fig = plt.figure()
+<<<<<<< HEAD
     plt.hist(df[headings[0]],bins =range(binLength))
     sht = xw.Book().sheets[1]
+=======
+    plt.hist([1,2,1],bins =[0,1,2,3])
+    sht = xw.Book().sheets[0]
+>>>>>>> dcc349c64c52abd9cc9645bb478a7441e654f009
     sht.pictures.add(fig,name = "test",update ="TRUE")
+    return "Histogram Slot"
