@@ -212,12 +212,9 @@ def histogram(x,binLength = 1):
         binLength = len(df[headings[0]])
     binLength = int(binLength)
     fig = plt.figure()
-<<<<<<< HEAD
     plt.hist(df[headings[0]],bins =range(binLength))
     sht = xw.Book().sheets[1]
-=======
     plt.hist([1,2,1],bins =[0,1,2,3])
     sht = xw.Book().sheets[0]
->>>>>>> dcc349c64c52abd9cc9645bb478a7441e654f009
     sht.pictures.add(fig,name = "test",update ="TRUE")
     return "Histogram Slot"
