@@ -2,6 +2,7 @@ import xlwings as xw
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
+import math as mt
 
 @xw.func
 def hello(name):
@@ -44,15 +45,23 @@ def statMeasures(x):
     #Mean should find the average
     average = np.mean(df)
     #Median should find the central number
-    middle = np.median(df)
+    middle = [median(df)]
     #Mode should find the most common number
     common = mode(df)
     #Standard Deviation
-    deviate = np.stdev(df)
+    deviate = np.std(df)
     l = [average, middle, common, deviate]
     
     return l
-
+def median(list):
+    sortedList = sorted(list)
+    index = len(sortedList)/2
+    indexFloor = mt.floor(index)
+    indexCeiling = mt.ceil(index)
+    if indexFloor == indexCeiling:
+        return sortedList[indexFloor]
+    else:
+        return sortedList[indexFloor], sortedList[indexCeiling]
 def mode(list):
     modes = []
     modeDict = {}
