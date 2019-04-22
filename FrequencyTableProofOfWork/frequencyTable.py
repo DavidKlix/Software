@@ -48,7 +48,7 @@ def statMeasures(x):
     #Standard Deviation
     deviate = np.std(df)
     #Range
-    ran = range(df)
+    ran = ranging(df)
     #Minimum number
     minimum = min(df)
     #Maximum number
@@ -67,16 +67,22 @@ def statMeasures(x):
     l = [average, middle, common, deviate, ran, 
          minimum, maximum, total, count, Q1, Q3, IQR]
     return l
+def ranging(list):
+    q = sorted(list)
+    last = len(q) - 1
+    return q[last] - q[0]
 def firstQuartile(list):
     #List must be sorted to get the right values
     q = sorted(list)
     count = len(q)
+    #Taking floor to get a whole number
     index = mt.floor(count/4)
     return q[index]
 def thirdQuartile(list):
     #List must be sorted to get the right values
     q = sorted(list)
     count = len(q)
+    #Taking floor to match Q1
     index = mt.floor(count/4)*3
     return q[index]
 def median(list):
