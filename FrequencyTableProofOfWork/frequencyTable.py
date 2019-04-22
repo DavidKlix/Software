@@ -47,10 +47,40 @@ def statMeasures(x):
     common = mode(df)
     #Standard Deviation
     deviate = np.std(df)
-    l = [average, middle, common, deviate]
+    #Range
+    ran = range(df)
+    #Minimum number
+    minimum = min(df)
+    #Maximum number
+    maximum = max(df)
+    #Sum of the list
+    total = sum(df)
+    #How many elements are in the list
+    count = len(df)
+    #First quartile
+    Q1 = firstQuartile(df)
+    #Third Quartile
+    Q3 = thirdQuartile(df)
+    #Interquartile Range
+    IQR = Q3 - Q1
+    #Combination of all numbers in a list
+    l = [average, middle, common, deviate, ran, 
+         minimum, maximum, total, count, Q1, Q3, IQR]
     return l
-
+def firstQuartile(list):
+    #List must be sorted to get the right values
+    q = sorted(list)
+    count = len(q)
+    index = mt.floor(count/4)
+    return q[index]
+def thirdQuartile(list):
+    #List must be sorted to get the right values
+    q = sorted(list)
+    count = len(q)
+    index = mt.floor(count/4)*3
+    return q[index]
 def median(list):
+    #List must be sorted to get the right values
     sortedList = sorted(list)
     index = len(sortedList)/2
     indexFloor = mt.floor(index)

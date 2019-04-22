@@ -6,6 +6,17 @@ Created on Tue Apr 16 17:03:10 2019
 """
 import numpy as np
 import math as mt
+#df = x.apply(pd.Series)
+df = [1,3,5,4,2,3,1,4,3,2,3,3,4,1,4,3,4,1,4,4,3]
+def median(list):
+    sortedList = sorted(list)
+    index = len(sortedList)/2
+    indexFloor = mt.floor(index)
+    indexCeiling = mt.ceil(index)
+    if sortedList[indexFloor] == sortedList[indexCeiling]:
+        return sortedList[indexFloor]
+    else:
+        return sortedList[indexFloor], sortedList[indexCeiling]
 
 def mode(list):
     modes = []
@@ -28,19 +39,23 @@ def mode(list):
                     modes = [i]
                     max_value = modeDict[i]
     return modes
-def median(list):
-    sortedList = sorted(list)
-    index = len(sortedList)/2
-    indexFloor = mt.floor(index)
-    indexCeiling = mt.ceil(index)
-    if sortedList[indexFloor] == sortedList[indexCeiling]:
-        return sortedList[indexFloor]
-    else:
-        return sortedList[indexFloor], sortedList[indexCeiling]
+#headings = list(df.columns.values)
+#Mean should find the average
+average = np.mean(df)
+#Median should find the central number
+middle = median(df)
+#Mode should find the most common number
+common = mode(df)
+#Standard Deviation
+deviate = np.std(df)
+l = [average, middle, common, deviate]
+#return l
+
+
 x = [1,3,5,4,2,3,1,4,3,2,3,3,4,1,4,3,4,1,4,4,3]
-y = mode(x)
+'''y = mode(x)
 print(y)
 z = np.mean(x)
 l = median(x)
 print(z)
-print(l)
+print(l)'''
