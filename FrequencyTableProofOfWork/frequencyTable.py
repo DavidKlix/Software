@@ -63,9 +63,11 @@ def statMeasures(x):
     Q3 = thirdQuartile(df)
     #Interquartile Range
     IQR = Q3 - Q1
+    #Variance
+    var = variance(df)
     #Combination of all numbers in a list
     l = [average, middle, common, deviate, ran, 
-         minimum, maximum, total, count, Q1, Q3, IQR]
+         minimum, maximum, total, count, Q1, Q3, IQR, var]
     return l
 def ranging(list):
     q = sorted(list)
@@ -85,6 +87,14 @@ def thirdQuartile(list):
     #Taking floor to match Q1
     index = mt.floor(count/4)*3
     return q[index]
+def variance(list):
+    subtList = []
+    sqList = []
+    for i in list:
+        subtList.append(list[i] - np.mean(list))
+        sqList.append(subtList[i]**2)
+    summed = sum(sqList)
+    return summed/len(list)
 def median(list):
     #List must be sorted to get the right values
     sortedList = sorted(list)
