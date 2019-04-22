@@ -30,7 +30,7 @@ def frequencyTablePercent(x):
 def contingencyTable(x):
     df = x.apply(pd.Series)
     headings = list(df.columns.values)
-    tabby = pd.crosstab(columns = df[headings[0]], index= df[headings[1]], margins=True)
+    tabby = pd.crosstab(columns = df[headings[0]], index= df[headings[1]], margins=True, margins_name = "Total")
     return tabby
 
 @xw.func
@@ -173,7 +173,7 @@ def segmentedBarChart(x):
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
 def sideBySideBarChart(x):
-    df = x.apply(pd.Series)
+    df = x
     headings = list(df.columns.values)
     labels = df[0]
     n_groups = len(headings)-1 
@@ -182,8 +182,10 @@ def sideBySideBarChart(x):
     bar_width = 0.35
     opacity = 0.8
     
-    col1 = df[headings[1]]
-    col2 = df[headings[2]]
+    col1 = list(df.iloc[1])
+    col2 = list(df.iloc[2])
+    col1 = col1[1::]
+    col2 = col2[1::]
     fig = plt.figure()
     plt.bar(index, col1, bar_width,
     alpha=opacity,
@@ -205,8 +207,8 @@ def sideBySideBarChart(x):
 def test(x):
     # data to plot
     n_groups = 4
-    
-    
+
+
     means_frank = (203,118,178,212)
     means_guido = (112,167,528,673)
      
@@ -238,19 +240,27 @@ def test(x):
     return "Test Slot"
 
 
+@xw.func
+@xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
+def histogramexample(x):
+    x = [21,22,23,4,5,6,77,8,9,10,31,32,33,34,35,36,37,18,49,50,100]
+    num_bins = 5
+    n = plt.hist(x, num_bins, facecolor='blue', alpha=0.5)
+    sht = xw.Book().sheets[1]
+    sht.pictures.add(n,name = "test",update ="TRUE")
+    return "histogramExampleSlot"
 
 @xw.func
 @xw.arg('x', pd.DataFrame, index=False, header=True) #takes in argument as dataframe
 def histogram(x,binLength = 1):
     df = x.apply(pd.Series)
     headings = list(df.columns.values)
+    numbers = list(df[headings[0]])
     if (binLength == 1):
         binLength = len(df[headings[0]])
     binLength = int(binLength)
     fig = plt.figure()
-    plt.hist(df[headings[0]],bins =range(binLength))
+    plt.hist(numbers,bins =binLength+1)
     sht = xw.Book().sheets[1]
-    plt.hist([1,2,1],bins =[0,1,2,3])
-    sht = xw.Book().sheets[0]
     sht.pictures.add(fig,name = "test",update ="TRUE")
     return "Histogram Slot"
